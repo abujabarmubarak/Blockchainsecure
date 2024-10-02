@@ -1,0 +1,144 @@
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <div class="text-2xl font-bold">User Management
+            <footer style="padding: 16px; background-color: #1a202c;">
+                <nav style="display: flex; justify-content: flex-end; gap: 16px;">
+                    <a href="dashboards.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Dashboard</a>
+            
+                    <a href="transaction_log.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Transaction Log</a>
+            
+                    <a href="threat_detail.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Threat Detail</a>
+            
+                    <a href="settings.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Settings</a>
+                </nav>
+            </footer>
+                       
+        </div>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search..." class="p-2 rounded bg-gray-700 text-white">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+    <main class="p-4 space-y-4">
+        <!-- User List -->
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">User List</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">Username</th>
+                            <th class="py-2 px-4 border-b">Email</th>
+                            <th class="py-2 px-4 border-b">Role</th>
+                            <th class="py-2 px-4 border-b">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-100">
+                            <td class="py-2 px-4 border-b">user1</td>
+                            <td class="py-2 px-4 border-b">user1@example.com</td>
+                            <td class="py-2 px-4 border-b">Admin</td>
+                            <td class="py-2 px-4 border-b">
+                                <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                                <button class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-100">
+                            <td class="py-2 px-4 border-b">user2</td>
+                            <td class="py-2 px-4 border-b">user2@example.com</td>
+                            <td class="py-2 px-4 border-b">Analyst</td>
+                            <td class="py-2 px-4 border-b">
+                                <button class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                                <button class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Repeat for more users -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Role Management -->
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Role Management</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2">
+                    <label for="user-role" class="text-sm w-1/4">Select User</label>
+                    <select id="user-role" class="p-2 rounded border border-gray-300 w-3/4">
+                        <option value="user1">user1</option>
+                        <option value="user2">user2</option>
+                        <!-- Repeat for more users -->
+                    </select>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label for="role" class="text-sm w-1/4">Assign Role</label>
+                    <select id="role" class="p-2 rounded border border-gray-300 w-3/4">
+                        <option value="admin">Admin</option>
+                        <option value="analyst">Analyst</option>
+                        <option value="read-only">Read-Only</option>
+                    </select>
+                </div>
+                <button class="bg-green-500 text-white px-4 py-2 rounded mt-4">Update Role</button>
+            </div>
+        </section>
+
+        <!-- Invite New Users -->
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Invite New Users</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2">
+                    <label for="invite-email" class="text-sm w-1/4">Email</label>
+                    <input type="email" id="invite-email" class="p-2 rounded border border-gray-300 w-3/4">
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label for="invite-role" class="text-sm w-1/4">Role</label>
+                    <select id="invite-role" class="p-2 rounded border border-gray-300 w-3/4">
+                        <option value="admin">Admin</option>
+                        <option value="analyst">Analyst</option>
+                        <option value="read-only">Read-Only</option>
+                    </select>
+                </div>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Send Invite</button>
+            </div>
+        </section>
+    </main>
+    <footer class="p-4"></footer>
+        <nav class="flex space-x-4">
+            <a href="dashboard.html" class="text-gray-800">Dashboard</a>
+            <a href="transaction_log.html" class="text-gray-800">Transaction Log</a>
+            <a href="threat_detail.html" class="text-gray-800">Threat Detail</a>
+            <a href="settings.html" class="text-gray-800">Settings</a>
+        </nav>
+    </footer>
+</body>
+</html>

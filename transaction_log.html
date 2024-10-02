@@ -1,0 +1,167 @@
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Log</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <div class="text-2xl font-bold">Transaction Log
+            <footer style="padding: 16px; background-color: #1a202c;">
+                <nav style="display: flex; justify-content: flex-end; gap: 16px;">
+                    <a href="dashboards.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Dashboard</a>
+            
+                    <a href="threat_detail.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Threat Detail</a>
+            
+                    <a href="settings.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Settings</a>
+
+                    <a href="user_management.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       User Management</a>
+                </nav>
+            </footer>
+            
+        </div>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search..." class="p-2 rounded bg-gray-700 text-white">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+    <main class="p-4 space-y-4">
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Search Transactions</div>
+                <input type="text" id="searchInput" placeholder="Search by ID, sender, or receiver..." class="p-2 rounded border border-gray-300 w-full ml-4" onkeyup="filterTransactions()">
+            </div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Filter Options</div>
+                <div class="flex space-x-4">
+                    <input type="date" id="startDate" class="p-2 rounded border border-gray-300" onchange="filterTransactions()">
+                    <input type="date" id="endDate" class="p-2 rounded border border-gray-300" onchange="filterTransactions()">
+                    <select id="statusFilter" class="p-2 rounded border border-gray-300" onchange="filterTransactions()">
+                        <option value="">All Transactions</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Flagged">Flagged</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Transaction Table</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">Time</th>
+                            <th class="py-2 px-4 border-b">Source</th>
+                            <th class="py-2 px-4 border-b">Destination</th>
+                            <th class="py-2 px-4 border-b">Amount</th>
+                            <th class="py-2 px-4 border-b">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionTable">
+                        <!-- Transaction rows will be generated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <footer class="p-4">
+        <nav class="flex space-x-4">
+            <a href="dashboard.html" class="text-gray-800">Dashboard</a>
+            <a href="threat_detail.html" class="text-gray-800">Threat Detail</a>
+            <a href="settings.html" class="text-gray-800">Settings</a>
+            <a href="user_management.html" class="text-gray-800">User Management</a>
+        </nav>
+    </footer>
+    <script>
+        // Mock transaction dataset
+        const transactions = generateTransactions(1000);
+
+        // Function to generate mock transactions
+        function generateTransactions(count) {
+            const statuses = ['Confirmed', 'Pending', 'Flagged'];
+            const transactions = [];
+            for (let i = 0; i < count; i++) {
+                const source = `0x${Math.random().toString(16).substr(2, 4)}...${Math.random().toString(16).substr(2, 4)}`;
+                const destination = `0x${Math.random().toString(16).substr(2, 4)}...${Math.random().toString(16).substr(2, 4)}`;
+                const date = new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toISOString().split('T')[0];
+                const amount = (Math.random() * 10).toFixed(3);
+                const status = statuses[Math.floor(Math.random() * statuses.length)];
+                transactions.push({
+                    time: `${date} ${new Date().toTimeString().split(' ')[0]}`,
+                    source,
+                    destination,
+                    amount: `${amount} BTC`,
+                    status
+                });
+            }
+            return transactions;
+        }
+
+        // Function to render the transaction table
+        function renderTransactions(filteredTransactions) {
+            const tableBody = document.getElementById('transactionTable');
+            tableBody.innerHTML = ''; // Clear existing rows
+            filteredTransactions.forEach(transaction => {
+                const row = `<tr class="hover:bg-gray-100 cursor-pointer">
+                    <td class="py-2 px-4 border-b">${transaction.time}</td>
+                    <td class="py-2 px-4 border-b">${transaction.source}</td>
+                    <td class="py-2 px-4 border-b">${transaction.destination}</td>
+                    <td class="py-2 px-4 border-b">${transaction.amount}</td>
+                    <td class="py-2 px-4 border-b ${transaction.status === 'Flagged' ? 'text-red-500' : transaction.status === 'Pending' ? 'text-yellow-500' : 'text-green-500'}">${transaction.status}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Initial rendering of the table with all transactions
+        renderTransactions(transactions);
+
+        // Function to filter transactions based on search and filter criteria
+        function filterTransactions() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            const filteredTransactions = transactions.filter(transaction => {
+                // Filter by search input (sender or receiver)
+                const matchesSearch = transaction.source.toLowerCase().includes(searchInput) || transaction.destination.toLowerCase().includes(searchInput);
+                
+                // Filter by date range
+                const transactionDate = new Date(transaction.time.split(' ')[0]);
+                const matchesDate = (!startDate || new Date(startDate) <= transactionDate) && (!endDate || new Date(endDate) >= transactionDate);
+                
+                // Filter by status
+                const matchesStatus = !statusFilter || transaction.status === statusFilter;
+
+                return matchesSearch && matchesDate && matchesStatus;
+            });
+
+            renderTransactions(filteredTransactions);
+        }
+    </script>
+</body>
+</html>

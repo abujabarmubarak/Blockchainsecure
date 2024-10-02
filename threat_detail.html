@@ -1,0 +1,132 @@
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <div class="text-2xl font-bold">Threat Detail
+            <footer style="padding: 16px; background-color: #1a202c;">
+                <nav style="display: flex; justify-content: flex-end; gap: 16px;">
+                    <a href="dashboards.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Dashboard</a>
+                    <a href="transaction_log.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Transaction Log</a>
+                    <a href="settings.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Settings</a>
+                    <a href="user_management.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       User Management</a>
+                </nav>
+            </footer>
+            
+        </div>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search..." class="p-2 rounded bg-gray-700 text-white">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+    <main class="p-4 space-y-4">
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Threat Summary</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-red-500 rounded-full"></div>
+                    <div class="text-sm">Time of Detection: 2023-10-01 12:36:56</div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-yellow-500 rounded-full"></div>
+                    <div class="text-sm">Threat Level: High</div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
+                    <div class="text-sm">Affected Transaction: 0x3456...cdef</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">AI Analysis Report</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm">The AI detected unusual patterns in the transaction flow, including a sudden spike in transaction volume and interactions with a known suspicious address. The transaction was flagged due to these anomalies.</p>
+            </div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Actions</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 flex space-x-4">
+                <button class="bg-green-500 text-white px-4 py-2 rounded" onclick="alert('Action taken Approved!')">Approve</button>
+                <button class="bg-red-500 text-white px-4 py-2 rounded" onclick="alert('Action taken Disapproved!')">Disapprove</button>
+                <button class="bg-yellow-500 text-white px-4 py-2 rounded" onclick="alert('Action takes Investgation!')">Investigate Further</button>
+            </div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Transaction Details</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">Field</th>
+                            <th class="py-2 px-4 border-b">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border-b">Transaction ID</td>
+                            <td class="py-2 px-4 border-b">0x3456...cdef</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b">Sender</td>
+                            <td class="py-2 px-4 border-b">0x1234...abcd</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b">Receiver</td>
+                            <td class="py-2 px-4 border-b">0x5678...efgh</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b">Amount</td>
+                            <td class="py-2 px-4 border-b">2.345 BTC</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b">Status</td>
+                            <td class="py-2 px-4 border-b text-red-500">Flagged</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <footer class="p-4">
+        <nav class="flex space-x-4">
+            <a href="dashboard.html" class="text-gray-800">Dashboard</a>
+            <a href="transaction_log.html" class="text-gray-800">Transaction Log</a>
+            <a href="settings.html" class="text-gray-800">Settings</a>
+            <a href="user_management.html" class="text-gray-800">User Management</a>
+        </nav>
+    </footer>
+</body>
+</html>

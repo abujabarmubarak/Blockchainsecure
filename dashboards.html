@@ -1,0 +1,149 @@
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <div class="text-2xl font-bold">Dashboard
+            <footer style="padding: 16px; background-color: #1a202c;">
+                <nav style="display: flex; justify-content: flex-end; gap: 16px;">
+                    <a href="transaction_log.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Transaction Log</a>
+            
+                    <a href="threat_detail.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Threat Detail</a>
+            
+                    <a href="settings.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Settings</a>
+
+                    <a href="user_management.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       User Management</a>
+                </nav>
+            </footer>
+            
+        </div>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search..." class="p-2 rounded bg-gray-700 text-white">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+    <main class="p-4 space-y-4">
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Live Transaction Feed</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2" id="transaction-feed"></div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Threat Alerts</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-red-500 rounded-full"></div>
+                    <div class="text-sm">High Alert: Suspicious transaction detected</div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-yellow-500 rounded-full"></div>
+                    <div class="text-sm">Medium Alert: Unusual node activity</div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-green-500 rounded-full"></div>
+                    <div class="text-sm">Low Alert: Minor anomaly detected</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Blockchain Health Overview</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4">
+                <canvas id="blockchainHealthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Notification Center</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
+                    <div class="text-sm">New update available</div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-orange-500 rounded-full"></div>
+                    <div class="text-sm">System maintenance scheduled</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // WebSocket for real-time transaction feed
+        const transactionFeed = document.getElementById('transaction-feed');
+        const ws = new WebSocket('wss://example.com/transactions');
+        ws.onmessage = (event) => {
+            const transaction = JSON.parse(event.data);
+            const transactionElement = document.createElement('div');
+            transactionElement.classList.add('flex', 'items-center', 'space-x-2');
+            transactionElement.innerHTML = `
+                <div class="w-8 h-8 bg-orange-500 rounded-full"></div>
+                <div class="text-sm">${transaction.details}</div>
+            `;
+            transactionFeed.prepend(transactionElement);
+        };
+
+        // Chart.js for Blockchain Health Overview
+        const ctx = document.getElementById('blockchainHealthChart').getContext('2d');
+        const blockchainHealthChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Transaction Volume',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <footer class="p-4">
+        <nav class="flex space-x-4">
+            <a href="transaction_log.html" class="text-gray-800">Transaction Log</a>
+            <a href="threat_detail.html" class="text-gray-800">Threat Detail</a>
+            <a href="settings.html" class="text-gray-800">Settings</a>
+            <a href="user_management.html" class="text-gray-800">User Management</a>
+        </nav>
+    </footer>
+</body>
+</html>

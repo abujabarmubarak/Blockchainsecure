@@ -1,0 +1,109 @@
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <div class="text-2xl font-bold">Settings
+            <footer style="padding: 16px; background-color: #1a202c;">
+                <nav style="display: flex; justify-content: flex-end; gap: 16px;">
+                    <a href="dashboard.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Dashboard</a>
+            
+                    <a href="transaction_log.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Transaction Log</a>
+            
+                    <a href="threat_detail.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       Threat Detail</a>
+            
+                    <a href="user_management.html" style="background-color: #edf2f7; padding: 12px 20px; border-radius: 8px; color: #2d3748; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='#cbd5e0'; this.style.boxShadow='0px 4px 6px rgba(0,0,0,0.1)';"
+                       onmouseout="this.style.backgroundColor='#edf2f7'; this.style.boxShadow='none';">
+                       User Management</a>
+                </nav>
+            </footer>
+            
+        </div>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search..." class="p-2 rounded bg-gray-700 text-white">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+    <main class="p-4 space-y-4">
+        <!-- Alert Settings -->
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Alert Settings</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="email-alerts" class="form-checkbox">
+                    <label for="email-alerts" class="text-sm">Email Alerts</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="sms-alerts" class="form-checkbox">
+                    <label for="sms-alerts" class="text-sm">SMS Alerts</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="in-app-alerts" class="form-checkbox">
+                    <label for="in-app-alerts" class="text-sm">In-App Notifications</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Threshold Configuration -->
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">AI Threshold Configuration</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4">
+                <label for="ai-sensitivity" class="text-sm">AI Sensitivity Level</label>
+                <select id="ai-sensitivity" class="p-2 rounded border border-gray-300 w-full mt-2">
+                    <option value="low">Low Sensitivity</option>
+                    <option value="medium">Medium Sensitivity</option>
+                    <option value="high">High Sensitivity</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Account Preferences -->
+        <section class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+                <div class="text-lg font-bold">Account Preferences</div>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2">
+                    <label for="password" class="text-sm w-1/4">Password</label>
+                    <input type="password" id="password" class="p-2 rounded border border-gray-300 w-3/4">
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label for="2fa" class="text-sm w-1/4">Two-Factor Authentication</label>
+                    <input type="checkbox" id="2fa" class="form-checkbox">
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="p-4"></footer>
+        <nav class="flex space-x-4">
+            <a href="dashboard.html" class="text-gray-800">Dashboard</a>
+            <a href="transaction_log.html" class="text-gray-800">Transaction Log</a>
+            <a href="threat_detail.html" class="text-gray-800">Threat Detail</a>
+            <a href="user_management.html" class="text-gray-800">User Management</a>
+        </nav>
+    </footer>
+</body>
+</html>
